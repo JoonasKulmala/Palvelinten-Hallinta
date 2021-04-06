@@ -255,6 +255,25 @@ $ sudoedit /srv/salt/fortune.sls
 fortune-mod:
   pkg.installed: []
 $ sudo salt slave-1 state.apply fortune
+slave-1:
+----------
+          ID: fortune-mod
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 03:54:43.919315
+    Duration: 32.923 ms
+     Changes:   
+
+Summary for slave-1
+------------
+Succeeded: 1
+Failed:    0
+------------
+Total states run:     1
+Total run time:  32.923 ms
+```
+Everything seems to be fully working!
 
 ## Final thoughts
 
