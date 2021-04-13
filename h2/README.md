@@ -17,13 +17,17 @@
 
 ## Exercise goals and enviroment
 
+The goal was to further learn about salt and how to use it to install desired packages & and for other tasks. I successfully installed multiple packages and ran some basic tests and diagnostics to evaluate the results.
+
+The exercises can be found [here](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h2-package-file-service)
+
 ## Exercises
 
 ### a) Daemon settings
 
 let's create a salt state **sshd** which:
-* Installs the package *openssh-server* on my only minion **slave-1**
-* Overwrites slave-1's `sshd_config` (/etc/ssh/sshd_config) file as per salt master's configuration file (/salt://sshd_config)
+* Installs the package *openssh-server* on my salt minions
+* Overwrites slave-1's `/etc/ssh/sshd_config` file with salt master's configuration `/salt://sshd_config` file
 * Makes sure *sshd* service is running
 
 #### Setting up
@@ -156,11 +160,11 @@ Protocol 2
 
 ![](Resources/State_ok.png)
 
-The task was succesful!
+The task was succesful! The configuration file `/etc/ssh/sshd_config` had its contents overwritten by the contents of `/srv/salt/sshd_config` file.
 
 ### b) Find command
 
-Let's install another program and afterwards check which files were modified. I'll go for **Libreoffice**.
+Let's install another program and afterwards check which files were modified to make sure our changes were properly applied. I'll go for **Libreoffice**.
 
 #### Installing Libreoffice
 
@@ -246,8 +250,7 @@ $ sudo salt-call --local state.apply sshd -l debug
 [DEBUG   ] Reading configuration from /etc/salt/minion.d/_schedule.conf
 [DEBUG   ] Using pkg_resources to load entry points
 ...
-[WARNING ] Insecure logging configuration detected! Sensitive data may be logged.
-...
+[WARNING ] Insecure logging configAdd missing step *find* for **task b**
 ...
 [DEBUG   ] In saltenv 'base', looking at rel_path 'sshd.sls' to resolve 'salt://sshd.sls'
 [DEBUG   ] In saltenv 'base', ** considering ** path '/var/cache/salt/minion/files/base/sshd.sls' to resolve 'salt://sshd.sls'
@@ -278,4 +281,7 @@ Tero Karvinen - [Apache User Homepages Automatically – Salt Package-File-Servi
 
 ## Edit history
 
-13.04.2021 - Add missing step find for task b
+13.04.2021
+* Add missing step *find* for **task b**
+* Correct typos
+* Add **exercise goals**, **final thoughts**
