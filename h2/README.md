@@ -215,6 +215,38 @@ Libreoffice salt installation complete!
 
 ### c) State w/o master-minion architecture
 
+Let's run **sshd** state on debug mode.
+
+```
+$ sudo salt-call --local state.apply sshd -l debug
+
+[DEBUG   ] Reading configuration from /etc/salt/minion
+[DEBUG   ] Including configuration from '/etc/salt/minion.d/_schedule.conf'
+[DEBUG   ] Reading configuration from /etc/salt/minion.d/_schedule.conf
+[DEBUG   ] Using pkg_resources to load entry points
+...
+[WARNING ] Insecure logging configuration detected! Sensitive data may be logged.
+...
+...
+[DEBUG   ] In saltenv 'base', looking at rel_path 'sshd.sls' to resolve 'salt://sshd.sls'
+[DEBUG   ] In saltenv 'base', ** considering ** path '/var/cache/salt/minion/files/base/sshd.sls' to resolve 'salt://sshd.sls'
+[DEBUG   ] compile template: /var/cache/salt/minion/files/base/sshd.sls
+...
+[DEBUG   ] Rendered data from file: /var/cache/salt/minion/files/base/sshd.sls:
+...
+[DEBUG   ] Results of YAML rendering: 
+OrderedDict([('openssh-server', 'pkg.installed'), ('/etc/ssh/sshd_config', OrderedDict([('file.managed', [OrderedDict([('source', 'salt://sshd_config')])])])), ('sshd', OrderedDict([('service.running', [OrderedDict([('watch', [OrderedDict([('file', '/etc/ssh/sshd_config')])])])])]))])
+
+```
+
+![](Resources/salt_debug_1.png)
+
+![](Resources/salt_debug_2.png)
+
+As we already got this particular state running without issues there's not much to debug here naturally. Still, reading through I found one **Warning** line about possible insecure data logging.
+
+Still interesting to see the process. It begins by accessing the minion file, which in this case would be `sshd.sls`.
+
 ## Final thoughts
 
 ## Sources
