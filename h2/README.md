@@ -213,6 +213,27 @@ Libreoffice salt installation complete!
 
 #### Find
 
+Let's try using **find** command. I'll make quick changes to `libreoffice.sls` and `Example.odt` files, save them and run the comand.
+
+```
+$ cd /srv/salt
+$ find -printf "%T+ %p\n"|sort
+...
+2021-04-13+05:05:02.4107398280 ./libreoffice.sls
+2021-04-13+05:08:13.3369651660 ./Example.odt
+```
+
+Target file for overwriting:
+
+```
+$ cd /tmp
+$ find -printf "%T+ %p\n"|sort
+...
+2021-04-13+05:08:27.9691352810 ./Example.odt
+```
+
+First I modified the `/srv/salt/libreoffice.sls` file. Then a few minutes later I also changed `/srv/saltExample.odt` in applied the new changes. This resulted in salt updating the target `/tmp/Example.odt` file.
+
 ### c) State w/o master-minion architecture
 
 Let's run **sshd** state on debug mode.
@@ -248,6 +269,8 @@ As we already got this particular state running without issues there's not much 
 Still interesting to see the process. It begins by accessing the minion file, which in this case would be `sshd.sls`.
 
 ## Final thoughts
+
+Interesting topic on how to further leverage the power of salt.
 
 ## Sources
 
