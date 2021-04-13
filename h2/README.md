@@ -277,3 +277,5 @@ Interesting topic on how to further leverage the power of salt.
 Tero Karvinen - [Apache User Homepages Automatically – Salt Package-File-Service Example](http://terokarvinen.com/2018/apache-user-homepages-automatically-salt-package-file-service-example/index.html?fromSearch=)
 
 ## Edit history
+
+13.04.2021 - Add missing step find for task b
