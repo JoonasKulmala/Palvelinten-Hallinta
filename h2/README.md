@@ -4,12 +4,13 @@
   - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
   - [Exercises](#exercises)
     - [a) Daemon settings](#a-daemon-settings)
-      - [Setting up](#setting-up)
-      - [Execute phase](#execute-phase)
-      - [Checking results](#checking-results)
+      - [Configuring salt master files](#configuring-salt-master-files)
+      - [Applying state](#applying-state)
+      - [Verifying results](#verifying-results)
     - [b) Find command](#b-find-command)
-      - [Installing Libreoffice](#installing-libreoffice)
-      - [Find](#find)
+      - [Configuring salt master files](#configuring-salt-master-files-1)
+      - [Applying state](#applying-state-1)
+      - [Find commnd](#find-commnd)
     - [c) State w/o master-minion architecture](#c-state-wo-master-minion-architecture)
   - [Final thoughts](#final-thoughts)
   - [Sources](#sources)
@@ -19,20 +20,24 @@
 
 The goal was to further learn about salt and how to use it to install desired packages & and for other tasks. I successfully installed multiple packages and ran some basic tests and diagnostics to evaluate the results.
 
-The exercises can be found [here](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h2-package-file-service)
+The previous exercise [h1](/h1/README.md) explains how to setup master-minion architecture.
+
+The exercises for **h2** can be found [here](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h2-package-file-service)
 
 ## Exercises
 
 ### a) Daemon settings
 
 let's create a salt state **sshd** which:
-* Installs the package *openssh-server* on my salt minions
-* Overwrites slave-1's `/etc/ssh/sshd_config` file with salt master's configuration `/salt://sshd_config` file
+* Installs the package *openssh-server* on salt minions
+* Overwrites salt minions' `/etc/ssh/sshd_config` file with salt master's configuration `/salt://sshd_config` file
 * Makes sure *sshd* service is running
 
-#### Setting up
+#### Configuring salt master files
 
-`sshd.sls` state file:
+Let's start with setting master files.
+
+My `/srv/salt/sshd.sls` state file looks like this:
 
 ```
 openssh-server:
@@ -46,9 +51,10 @@ sshd:
      - file: /etc/ssh/sshd_config
 ```
 
-Salt master's `sshd_config` file:
+And `/srv/salt/sshd_config` file:
 
 ```
+# Generic sshd_config
 # DON'T EDIT - managed file, changes will be overwritten
 Port 22
 Port 8888
@@ -83,7 +89,7 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM no
 ```
 
-#### Execute phase
+#### Applying state
 
 Now that we have all the files ready, let's try this in action.
 
@@ -98,42 +104,55 @@ $ sudo systemctl restart sshd
 ```
 
 ```
-slave-1:
+minion-1:
 ----------
           ID: openssh-server
     Function: pkg.installed
       Result: True
      Comment: All specified packages are already installed
-     Started: 03:42:57.396226
-    Duration: 31.778 ms
+     Started: 10:28:08.851135
+    Duration: 39.736 ms
      Changes:   
 ----------
           ID: /etc/ssh/sshd_config
     Function: file.managed
       Result: True
-     Comment: File /etc/ssh/sshd_config is in the correct state
-     Started: 03:42:57.432514
-    Duration: 19.782 ms
+     Comment: File /etc/ssh/sshd_config updated
+     Started: 10:28:08.894573
+    Duration: 21.013 ms
      Changes:   
+              ----------
+              diff:
+                  --- 
+                  +++ 
+                  @@ -1,4 +1,4 @@
+                  -#### Generic sshd_config
+                  +# Generic sshd_config
+                   # DON'T EDIT - managed file, changes will be overwritten
+                   Port 22
+                   Port 8888
 ----------
           ID: sshd
     Function: service.running
       Result: True
-     Comment: The service sshd is already running
-     Started: 03:42:57.453622
-    Duration: 36.12 ms
+     Comment: Service restarted
+     Started: 10:28:08.956608
+    Duration: 112.054 ms
      Changes:   
+              ----------
+              sshd:
+                  True
 
-Summary for slave-1
+Summary for minion-1
 ------------
-Succeeded: 3
+Succeeded: 3 (changed=2)
 Failed:    0
 ------------
 Total states run:     3
-Total run time:  87.680 ms
+Total run time: 172.803 ms
 ```
 
-#### Checking results
+#### Verifying results
 
 The state would appear to been applied succesfully. Let's nagivate to ```/etc/ssh/sshd_config``` and see if it was actually overwritten.
 
@@ -147,18 +166,17 @@ While the contents of `sshd_config` vary between dfferent OS distributions, *Ubu
 ...
 ```
 
-Minion **slave-1**'s however should start with the commented line "# DON'T EDIT - managed file, changes will be overwritten":
+My minion **minion-1**'s however should now look the same as `/srv/salt/sshd_config` file.
 
 ```
 $ cat /etc/ssh/sshd_config
+# Generic sshd_config
 # DON'T EDIT - managed file, changes will be overwritten
 Port 22
-Port 8888
-Protocol 2
 ...
 ```
 
-![](Resources/State_ok.png)
+![](Resources/state_ok.png)
 
 The task was succesful! The configuration file `/etc/ssh/sshd_config` had its contents overwritten by the contents of `/srv/salt/sshd_config` file.
 
@@ -166,21 +184,25 @@ The task was succesful! The configuration file `/etc/ssh/sshd_config` had its co
 
 Let's install another program and afterwards check which files were modified to make sure our changes were properly applied. I'll go for **Libreoffice**.
 
-#### Installing Libreoffice
+The task will be to
+* install Libreoffice package
+* create a document `Example.odt` in user's `/tmp` directory
+* use *find* command in terminal to verify which files were modified
+
+#### Configuring salt master files
 
 ```
 $ apt-cache search libreoffice
 # Returns so many packages...
 $ libreoffice
 Command 'libreoffice' not found, but can be installed with:
-...
 sudo apt  install libreoffice-common  # version 1:6.4.6-0ubuntu0.20.04.1
 ...
 ```
 
 Not the most elegant way, but know we know our target package: **libreoffice-common**.
 
-`libreoffice-sls` file:
+`libreoffice.sls` state file:
 
 ```
 libreoffice-common:
@@ -191,52 +213,85 @@ libreoffice-common:
 
 ```
 
-`Example.odt` file:
+`/srv/salt/Example.odt` file which we want to be created in `/tmp` directory:
 ```
 Libreoffice salt installation complete!
 ```
 
-Apply state:
+#### Applying state
+
 ```
-sudo salt '*' state.apply libreoffice
+$ sudo salt '*' state.apply libreoffice
+
+minion-1:
+----------
+          ID: libreoffice-common
+    Function: pkg.installed
+      Result: True
+     Comment: The following packages were installed/updated: libreoffice-common
+     Started: 10:49:32.783191
+    Duration: 34381.391 ms
+     Changes:   
+              ----------
 ...
-Summary for slave-1
+----------
+          ID: /tmp/Example.odt
+    Function: file.managed
+      Result: True
+     Comment: File /tmp/Example.odt updated
+     Started: 10:50:07.176066
+    Duration: 37.02 ms
+     Changes:   
+              ----------
+              diff:
+                  New file
+              mode:
+                  0644
+
+Summary for minion-1
 ------------
 Succeeded: 2 (changed=2)
 Failed:    0
 ------------
 Total states run:     2
-Total run time:  44.180 s
+Total run time:  34.418 s
 ```
-And check:
+
+The state was applied successfully. Looking towards the end of the output you can see the summary lines.
+
+  Succeeded: 2 (changed=2)
+
+  Failed:    0
+
+Let's also check `/tmp/Example.odt` to see the created file:
+
 ```
 cat /tmp/Example.odt
 Libreoffice salt installation complete!
 ```
 ![](Resources/libreoffice.png)
 
-#### Find
+#### Find commnd
 
-Let's try using **find** command. I'll make quick changes to `libreoffice.sls` and `Example.odt` files, save them and run the comand.
+Let's try using **find** to verify which files were changed recently.
+ First up are the two files `libreoffice.sls` and `Example.odt` in `/srv/salt` directory:
 
 ```
 $ cd /srv/salt
 $ find -printf "%T+ %p\n"|sort
 ...
-2021-04-13+05:05:02.4107398280 ./libreoffice.sls
-2021-04-13+05:08:13.3369651660 ./Example.odt
+2021-04-15+10:59:54.9729041550 ./libreoffice.sls
+2021-04-15+11:00:13.3369651660 ./Example.odt
 ```
-
-Target file for overwriting:
+These were created manually by myself. Let's now check the `/tmp/Example.odt` file which was created automatically upon applying the state:
 
 ```
 $ cd /tmp
 $ find -printf "%T+ %p\n"|sort
 ...
-2021-04-13+05:08:27.9691352810 ./Example.odt
+2021-04-15+11:01:30.7133095120 ./Example.odt
 ```
-
-First I modified the `/srv/salt/libreoffice.sls` file. Then a few minutes later I also changed `/srv/saltExample.odt` in applied the new changes. This resulted in salt updating the target `/tmp/Example.odt` file.
+Seems to be working just fine. `/tmp/Example.odt` was created almost immediately after finishing up configure files and applying salt state.
 
 ### c) State w/o master-minion architecture
 
@@ -273,15 +328,21 @@ Still interesting to see the process. It begins by accessing the minion file, wh
 
 ## Final thoughts
 
-Interesting topic on how to further leverage the power of salt.
+Interesting topic on how to further leverage the power of salt. It seems to be a reliable and effective way to ensure desired packages are installed, can create files, change settings and so much more. This exercise barely scratched the surface. I did some further reading about salt enviroments and how to better use `top.sls` file.
 
 ## Sources
 
 Tero Karvinen - [Apache User Homepages Automatically – Salt Package-File-Service Example](http://terokarvinen.com/2018/apache-user-homepages-automatically-salt-package-file-service-example/index.html?fromSearch=)
 
+SaltStack - [The Top File](https://docs.saltproject.io/en/latest/ref/states/top.html)
+
 ## Edit history
 
 13.04.2021
 * Add missing step *find* for **task b**
-* Correct typos
+* Fix typos
 * Add **exercise goals**, **final thoughts**
+
+15.04.2021
+* Better reflect the output by running exercies on an empty machine
+* Fix typos
