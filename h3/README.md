@@ -1,9 +1,12 @@
 # h3 | Joonas Kulmala
 
-| Tool | Version            |
-| ---- | ------------------ |
-| OS   | Linux Ubuntu 20.14 |
-| Git  | 2.25.1             |
+| Tool     | Version           |
+| -------- | ----------------- |
+| Linux OS | Ubuntu 20.14      |
+| GNU bash | 5.0.17(1)-release |
+| Git      | 2.25.1            |
+
+<br></br>
 
 - [h3 | Joonas Kulmala](#h3--joonas-kulmala)
   - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
@@ -36,7 +39,7 @@ The exercises for h3 can be found on Tero Karvinen's website [here](https://tero
 
 The task was to be written in **Markdown**. And so, here we are.
 
-Please check out the [raw](https://raw.githubusercontent.com/JoonasKulmala/Palvelinten-Hallinta/main/h3/README.md) format of this `README.md` file. GitHub automatically renders Markdown, so it should be interesting to see the syntax before that happens.
+Please check out the [raw](https://raw.githubusercontent.com/JoonasKulmala/Palvelinten-Hallinta/main/h3/README.md) format of this `README.md` file. GitHub automatically renders Markdown, so it should be interesting to see the syntax in plain text.
 
 Here is Markdown's [Basic Syntax](https://www.markdownguide.org/basic-syntax "Basic Syntax") guide and here's GitHub's [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) guide.
 
@@ -220,15 +223,38 @@ git reset:
 ![git reset](Resources/git_before.png)
 
 So what actually happened?
-1.  git rm removed the file `README.md` from working directory (gone, reduced to atoms)
+1.  git rm removed the file `README.md` from working directory
 2.  git reset --hard undid the removal by returning HEAD to the state of latest commit ceb9b31~, recreating `README.md`
 
 
 ### f) New salt module
 
+I want to create a salt setup which automatically creates a folder for specific group members and then downloads certain GitHub repositories.
+
+    $ cd /srv/salt
+    $ touch my-salt-setup.sls
+    $ sudoedit my-salt-setup-sls
+
+    /home/${USER}/Repos:
+      file.directory:
+        - user:
+        - group: developer
+        - file_mode: 755
+        - dir_mode: 755
+        - makedirs: True
+
+However here I ran into problems. I cannot figure out to to create a directory `/Repos` for each ${USER}.
+
+
+
+
 ### d) `/srv/salt` on git
 
 ## Final thoughts
+
+Markdown and basic git commands were quite familiar to me already. I have worked on multiple projects were git & GitHub were used to a degree.
+
+Had some issues with salt, namely trying to create directories for minion under certain conditions. Will update **f)** once I figure it out.
 
 ## Sources
 
