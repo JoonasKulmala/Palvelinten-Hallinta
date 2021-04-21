@@ -20,7 +20,6 @@
       - [git blame](#git-blame)
     - [e) Dumb git change](#e-dumb-git-change)
     - [f) New salt module](#f-new-salt-module)
-    - [d) `/srv/salt` on git](#d-srvsalt-on-git)
   - [Final thoughts](#final-thoughts)
   - [Sources](#sources)
   - [Edit history](#edit-history)
@@ -243,12 +242,10 @@ I want to create a salt setup which automatically creates a folder for specific 
         - dir_mode: 755
         - makedirs: True
 
-However here I ran into problems. I cannot figure out to to create a directory `/Repos` for each ${USER}.
+However here I ran into problems. I cannot figure out to to create a directory `/Repos` for each user in `/home/user`. I guess it would be easier to to initialize directories for each minion, but a minion may have multiple users after all.
 
+I'll leave this task open until a proper way is figured out...
 
-
-
-### d) `/srv/salt` on git
 
 ## Final thoughts
 
