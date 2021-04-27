@@ -4,11 +4,21 @@
   - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
   - [Exercises](#exercises)
     - [a) Hei komento!](#a-hei-komento!)
+      - [Writing the shell script](#writing-the-shell-script)
+      - [Install shell script on salt minions](#install-shell-script-on-salt-minions)
     - [b) whatsup.sh](#b-whatsup.sh)
+      - [Writing the shell script](#writing-the-shell-script-1)
+      - [Install shell script on salt minions](#install-shell-script-on-salt-minions-1)
     - [c) hello.py](#c-hello.py)
+      - [Python script file](#python-script-file)
+      - [Install python and python script on salt minions](#install-python-and-python-script-on-salt-minions)
     - [d) Laiskaa skriptailua](#d-laiskaa-skriptailua)
+      - [Recurse state file](#recurse-state-file)
     - [e) Intel](#e-intel)
-    - [d) Lukua ei luottamusta](#d-lukua-ei-luottamusta)
+      - [First case](#first-case)
+      - [Second case](#second-case)
+      - [Third case](#third-case)
+    - [d) Lukua, ei luottamusta](#d-lukua-ei-luottamusta)
   - [Final thoughts](#final-thoughts)
   - [Sources](#sources)
   - [Edit history](#edit-history)
@@ -190,7 +200,7 @@ Now let's test it with both python3 and shell commands:
 
 All seems fine.
 
-#### Install python & python script on salt minions
+#### Install python and python script on salt minions
 
 Just like in earlier tasks we'll need script file and `.sls` state file.
 
@@ -296,9 +306,28 @@ Teemu Aittomäki - [Salt, Lamp, Eclipse](https://teemuaittomaki.wordpress.com/20
 
 Module which installs LAMP, Eclipse IDE for PHP coding, creates user groups and shared directories/files. Possibly a good way to setup similar or even identical virtual enviroments for a group who will be working on joint projects.
 
-### d) Lukua ei luottamusta
+### d) Lukua, ei luottamusta
 
-I'll try the first case by Roope Varttila. It should be a 3-step process:
+I'll try the first case by Roope Varttila. It should be a 3-step process.
+
+The script `saltpress.sh` looks like this:
+
+	#!/bin/bash
+	# Made by roopelinux 2018 - if something breaks it's not my fault. :^)
+
+	apt-get update
+
+	apt-get install -y salt-minion
+
+	mkdir /srv/salt
+
+	sudo salt-call --local state.highstate --file-root .
+
+	cp wordpress/wp-config.php /var/www/html/
+
+	chown -R www-data:root /var/www
+
+Seems ok for the most part I guess. Let's see what happens when I follow the installation procedure here:
 
 	# Repository to clone
 	$ git clone https://github.com/sadboirick/saltpress.git
@@ -314,11 +343,13 @@ This is the result of applying a salt state:
 	Succeeded: 10 (changed=11)
 	Failed:     7
 
-So clearly everything did not work as intented.
+So clearly everything did not work as intented. If I'm reading the output correctly WordPress and Apache were installed succesfully but pretty much everything regarding MySQL database operations failed.
 
 ## Final thoughts
 
 I feel like I've now grasped the concept of salt states well enough. Next I'll try to learn more about proper salt structuring on master's side and try to create a salt state with all my basic Linux configs and test it on a fresh isntall.
+
+Browsing other peoples' salt projects was interesting. It's nice to be able to read through the scripts and files and know exactly what is going to run, unlike e.g. Windows and `.exe` binary files.
 
 ## Sources
 
