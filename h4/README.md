@@ -1,6 +1,17 @@
 # h4 | Joonas Kulmala
 
-
+- [h4 | Joonas Kulmala](#h4--joonas-kulmala)
+  - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
+  - [Exercises](#exercises)
+    - [a) Hei komento!](#a-hei-komento!)
+    - [b) whatsup.sh](#b-whatsup.sh)
+    - [c) hello.py](#c-hello.py)
+    - [d) Laiskaa skriptailua](#d-laiskaa-skriptailua)
+    - [e) Intel](#e-intel)
+    - [d) Lukua ei luottamusta](#d-lukua-ei-luottamusta)
+  - [Final thoughts](#final-thoughts)
+  - [Sources](#sources)
+  - [Edit history](#edit-history)
 
 ## Exercise goals and enviroment
 
@@ -285,7 +296,7 @@ Teemu Aittomäki - [Salt, Lamp, Eclipse](https://teemuaittomaki.wordpress.com/20
 
 Module which installs LAMP, Eclipse IDE for PHP coding, creates user groups and shared directories/files. Possibly a good way to setup similar or even identical virtual enviroments for a group who will be working on joint projects.
 
-### e) Lukua, ei luottamusta
+### d) Lukua ei luottamusta
 
 I'll try the first case by Roope Varttila. It should be a 3-step process:
 
@@ -303,10 +314,22 @@ This is the result of applying a salt state:
 	Succeeded: 10 (changed=11)
 	Failed:     7
 
+So clearly everything did not work as intented.
+
 ## Final thoughts
+
+I feel like I've now grasped the concept of salt states well enough. Next I'll try to learn more about proper salt structuring on master's side and try to create a salt state with all my basic Linux configs and test it on a fresh isntall.
 
 ## Sources
 
 Tero Karvinen - [h4 Uusi komento](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h4-uusi-komento)
+
+SaltStack - [How Do I Use Salt States?](https://docs.saltproject.io/en/latest/topics/tutorials/starting_states.html)
+
+Roope Varttila - [saltpress](https://github.com/sadboirick/saltpress#saltpress)
+
+Janne Mustonen - [Oma moduuli h7(Palvelinten hallinta)](https://jannelinux.design.blog/2020/05/19/oma-moduuli-h7/)
+
+Teemu Aittomäki - [Salt, Lamp, Eclipse](https://teemuaittomaki.wordpress.com/2020/05/20/palv-hallinta-h7/)
 
 ## Edit history
