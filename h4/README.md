@@ -1,11 +1,6 @@
 # h4 | Joonas Kulmala
 
-- [h4 | Joonas Kulmala](#h4--joonas-kulmala)
-  - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
-  - [Exercises](#exercises)
-  - [Final thoughts](#final-thoughts)
-  - [Sources](#sources)
-  - [Edit history](#edit-history)
+
 
 ## Exercise goals and enviroment
 
@@ -260,7 +255,53 @@ Using **file.recurse** seems quite an effective way to do things.
 
 ### e) Intel
 
+Brief review of those who came before.
+
+#### First case
+
+Roope Varttila - [saltpress](https://github.com/sadboirick/saltpress#saltpress)
+
+A module which install Wordpress in minutes. Tested on Xubuntu 16.04.4 LTS x64 live-USB. The process is fairly simple:
+
+1. Clone the repository
+2. Run **sudo saltpress.sh** installation script
+3. In terminal, firefox 'localhost' (or other browser)
+
+#### Second case
+
+Janne Mustonen - [Oma moduuli h7(Palvelinten hallinta)](https://jannelinux.design.blog/2020/05/19/oma-moduuli-h7/)
+
+A state which install & configures user's programs and whatnot on salt minion. Supposed to work on any Linux distro. Seems like a great idea, I'm actually planning on doing a similar state for myself during this course!
+
+Some listed software and settings:
+* Atom editor
+* Apache2 webserver & default page
+* Git
+* Bash config
+
+#### Third case
+
+Teemu Aittomäki - [Salt, Lamp, Eclipse](https://teemuaittomaki.wordpress.com/2020/05/20/palv-hallinta-h7/)
+
+Module which installs LAMP, Eclipse IDE for PHP coding, creates user groups and shared directories/files. Possibly a good way to setup similar or even identical virtual enviroments for a group who will be working on joint projects.
+
 ### e) Lukua, ei luottamusta
+
+I'll try the first case by Roope Varttila. It should be a 3-step process:
+
+	# Repository to clone
+	$ git clone https://github.com/sadboirick/saltpress.git
+	# Navigate to repository
+	$ cd saltpress
+	# Run the bash script
+	$ bash saltpress.sh
+
+This is the result of applying a salt state:
+
+	Summary for local
+		-------------
+	Succeeded: 10 (changed=11)
+	Failed:     7
 
 ## Final thoughts
 
