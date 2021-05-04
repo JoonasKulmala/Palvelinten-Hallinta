@@ -4,7 +4,11 @@
   - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
   - [Exercises](#exercises)
     - [a) Captain obvious](#a-captain-obvious)
+      - [Setting up](#setting-up)
+      - [Testing in action](#testing-in-action)
     - [b) Sammakko ja skorppioni](#b-sammakko-ja-skorppioni)
+      - [Creating salt state, running into issues](#creating-salt-state-running-into-issues)
+      - [Fixing issues](#fixing-issues)
     - [c) CSI Pasila](#c-csi-pasila)
     - [d) Tiedän mitä teit viime kesän^H^H^H komennolla](#d-tiedän-mitä-teit-viime-kesänhhh-komennolla)
     - [e) Program /w settings](#e-program-w-settings)
@@ -135,7 +139,7 @@ I created a state file `/srv/salt/vscode/vscode.sls`:
     'sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/':
       cmd.run
 
-    'sudo sh -c echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'':
+    'sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'':
       cmd.run
      #   -creates: /etc/apt/sources.list.d/vscode.list
 
@@ -278,16 +282,18 @@ Let's apply the salt state and see if the file gets changed indeed:
 
 Take a peek at previous timeline and this new one, compare them. See how it doesn't list the the modified `sshd_config` twice but rather once?
 
-
-
 ### e) Program /w settings
 
 ## Final thoughts
+
+Practice makes perfect, right? Perhaps not, but I feel like getting better and better with salt. It's an amazing way to automate operations.
 
 ## Sources
 
 Tero Karvinen - [h5](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h5-aikajana)
 
 Visual Studio Code - [Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
+
+SaltStack - [salt.states.cmd](https://docs.saltproject.io/en/latest/ref/states/all/salt.states.cmd.html)
 
 ## Edit history
