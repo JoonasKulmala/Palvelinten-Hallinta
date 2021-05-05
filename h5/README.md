@@ -311,7 +311,25 @@ Let's install another program. I'll go with Spotify. The process is similar to t
     $ spotify --version
      Spotify version 1.1.55.498.gf9a83c60, Copyright (c) 2021, Spotify Ltd
 
-Works like a charm.
+Works like a charm. Now let's make some changes to global settings. Some application settings are stored in `${USER}~/.config` directories, in this case `${USER}~/.config/spotify`. There we will find a file `pref` which holds certain configuration settings, e.g.:
+
+    $ cat ~/.config/spotify/prefs
+    ...
+    pp.window.position.x=52
+    ...
+    app.window.position.saved=true
+    app.window.position.height=1016
+    app.autostart-mode="off"
+    app.window.position.y=64
+    ...
+
+The `pref` file is (supposedly) created upon the first time Spotify is launched. I'll manage the file with salt and create it with few lines.
+
+    $ sudoedit /srv/sal/spotify/pref
+    app.autostart-mode="off"
+    app.autostart-configured=true
+
+Add -
 
 ## Final thoughts
 
