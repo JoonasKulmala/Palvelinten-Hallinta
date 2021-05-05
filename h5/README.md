@@ -10,8 +10,8 @@
       - [Creating salt state, running into issues](#creating-salt-state-running-into-issues)
       - [Fixing issues](#fixing-issues)
     - [c) CSI Pasila](#c-csi-pasila)
-    - [d) Tiedän mitä teit viime kesän^H^H^H komennolla](#d-tiedän-mitä-teit-viime-kesänhhh-komennolla)
-    - [e) Program /w settings](#e-program-w-settings)
+    - [c) Tiedän mitä teit viime kesän^H^H^H komennolla](#c-tiedän-mitä-teit-viime-kesänhhh-komennolla)
+    - [d) Program /w settings](#d-program-w-settings)
   - [Final thoughts](#final-thoughts)
   - [Sources](#sources)
   - [Edit history](#edit-history)
@@ -244,7 +244,7 @@ Let's run a command and see if anything changes when we take the timeline again.
 
 Look at the last 2 entries: those are new! Just by executing a single command 2 changes were made.
 
-### d) Tiedän mitä teit viime kesän^H^H^H komennolla
+### c) Tiedän mitä teit viime kesän^H^H^H komennolla
 
 Let's try changing some settings and afterwards creating a new timeline. I'll modify `/etc/ssh/sshd_config`:
 
@@ -282,7 +282,34 @@ Let's apply the salt state and see if the file gets changed indeed:
 
 Take a peek at previous timeline and this new one, compare them. See how it doesn't list the the modified `sshd_config` twice but rather once?
 
-### e) Program /w settings
+### d) Program /w settings
+
+Let's install another program. I'll go with Spotify. The process is similar to that of Visual Studio Code; apt repository has to be added before installing.
+
+    $ sudo mkdir /srv/salt/spotify
+    $ sudoedit /srv/salt/spotify.sls
+
+    'curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -':
+      cmd.run
+
+    'echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list':
+     cmd.run
+
+    'sudo apt-get update':
+     cmd.run
+
+    # Spotify
+    spotify-client:
+      pkg.installed: []
+
+    $ sudo salt '*' state.apply spotify/spotify
+
+![spotify](Resources/spotify.png)
+
+    $ spotify --version
+     Spotify version 1.1.55.498.gf9a83c60, Copyright (c) 2021, Spotify Ltd
+
+Works like a charm.
 
 ## Final thoughts
 
