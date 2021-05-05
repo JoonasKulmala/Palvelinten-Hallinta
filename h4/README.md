@@ -35,7 +35,7 @@ This week we learnt more about salt and used it to install shell scripts on mini
 
 Shells scripts are a practical way to create one line commands to execute suprisingly complex tasks.
 
-As always all exercise can be found on Tero Karvinen's website [Configuration Management Systems - Palvelinten Hallinta - Spring 2021](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h4-uusi-komento).
+As always all exercises can be found on Tero Karvinen's website [Configuration Management Systems - Palvelinten Hallinta - Spring 2021](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h4-uusi-komento).
 
 ## Exercises
 

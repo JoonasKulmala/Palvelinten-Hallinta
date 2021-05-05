@@ -197,6 +197,8 @@ It would seem that Visual Studio Code was installed succesfully.
     3c4e3df9e89829dce27b7b5c24508306b151f30d
     x64
 
+<img src="Resources/vscode.png" width="400">
+
 All's well that ends well... I suppose? Not quite, but atleast we managed to make it work. I'll research more into the matter and consult others to evaluate the situation properly. I've included the [`vscode.sls`](vscode.sls) file here. Until then...
 
 ### c) CSI Pasila
@@ -284,7 +286,7 @@ Take a peek at previous timeline and this new one, compare them. See how it does
 
 ### d) Program /w settings
 
-Let's install another program. I'll go with Spotify. The process is similar to that of Visual Studio Code; apt repository has to be added before installing.
+Let's install another program. I'll go with Spotify. The process is similar to that of Visual Studio Code; apt repository has to be added before installing. Here is Spotify's on guide: [Spotify for Linux](https://www.spotify.com/us/download/linux/)
 
     $ sudo mkdir /srv/salt/spotify
     $ sudoedit /srv/salt/spotify.sls
@@ -323,4 +325,10 @@ Visual Studio Code - [Visual Studio Code on Linux](https://code.visualstudio.com
 
 SaltStack - [salt.states.cmd](https://docs.saltproject.io/en/latest/ref/states/all/salt.states.cmd.html)
 
+Spotify - [Spotify for Linux](https://www.spotify.com/us/download/linux/)
+
 ## Edit history
+
+05.05.2021
+* Add task d) Program /w settings
+* Add Spotify source
