@@ -2,7 +2,16 @@
 
 ## Exercise goals and enviroment
 
+| Tool        | Version      |
+| ----------- | ------------ |
+| Linux OS    | Ubuntu 20.14 |
+| Windows OS  | 10 Home 20H2 |
+| Salt Master | 3003         |
+| Salt Minion | 3003         |
+
 This week is mostly about preparations for h7, specifically planning our own modules.
+
+I tested salt on Windows operating system. Windows was setup as salt minion whereas Linux was used as salt master. The test was conducted in my **local network**.
 
 ## Exercises
 
@@ -91,6 +100,15 @@ What settings and software does it include?
 
 ## Final thoughts
 
+I barely tested salt on Windows so it's difficult to say how well it's supposed to work. Installing and configuring salt minion seemed easy enough, though.
+
 ## Sources
 
+Tero Karvinen - [h6](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h6-windows)
+
+SaltStack - [Windows](https://docs.saltproject.io/en/latest/topics/installation/windows.html)
+
 ## Edit history
+
+12.05.2021
+* Add Final thoughts, Sources
