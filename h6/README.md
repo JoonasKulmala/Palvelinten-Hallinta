@@ -1,5 +1,16 @@
 # h6 | Joonas Kulmala
 
+- [h6 | Joonas Kulmala](#h6--joonas-kulmala)
+  - [Exercise goals and enviroment](#exercise-goals-and-enviroment)
+  - [Exercises](#exercises)
+    - [a) Kokeile Saltia Windowsissa](#a-kokeile-saltia-windowsissa)
+      - [Establishing master-minion connection](#establishing-master-minion-connection)
+      - [Testing salt state](#testing-salt-state)
+    - [b) Oman modulin aihe](#b-oman-modulin-aihe)
+  - [Final thoughts](#final-thoughts)
+  - [Sources](#sources)
+  - [Edit history](#edit-history)
+
 ## Exercise goals and enviroment
 
 | Tool        | Version      |
@@ -26,7 +37,7 @@ Note: remember to allow connections to salt-master via ports 4505 & 4506. E.g. w
 
 #### Establishing master-minion connection
 
-For this I'll be using my Windows PC as salt-minion and Linux Laptop as salt-master.
+For this I'll be using my Windows machine as salt minion and Linux machine as salt master.
 
 Downloading salt-minion on Windows is as easy as it gets - you can grab the `.exe` from here: [Windows](https://docs.saltproject.io/en/latest/topics/installation/windows.html).
 
@@ -53,7 +64,7 @@ Let's test the connection:
 
 ![pinging minion](Resources/ping_minion.png)
 
-#### Testing salt states
+#### Testing salt state
 
 Now that master has accepted a new minion, let's try out some basic states. I'll attempt to create a file on Windows minion.
 
@@ -112,3 +123,5 @@ SaltStack - [Windows](https://docs.saltproject.io/en/latest/topics/installation/
 
 12.05.2021
 * Add Final thoughts, Sources
+* Add Table of Contents
+* Typo fixes
