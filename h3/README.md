@@ -255,7 +255,7 @@ Had some issues with salt, namely trying to create directories for minion under 
 
 ## Sources
 
-Tero Karvinen - [h3](https://www.markdownguide.org/basic-syntax)
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 h3](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h3-versionhallinta)
 
 Markdown - [Basic Syntax](https://www.markdownguide.org/basic-syntax)
 

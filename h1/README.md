@@ -9,8 +9,8 @@
       - [Assign keys and try out giving commands](#assign-keys-and-try-out-giving-commands)
     - [b) Idempotent state](#b-idempotent-state)
       - [Apply state to all minions, set to automatic](#apply-state-to-all-minions-set-to-automatic)
-    - [d) Collect machine data using **grains.items** command](#d-collect-machine-data-using-grainsitems-command)
-    - [e) Testing state **pkg.installed**](#e-testing-state-pkginstalled)
+    - [d) Collect machine data using grains.items command](#d-collect-machine-data-using-grainsitems-command)
+    - [e) Testing state pkg.installed](#e-testing-state-pkginstalled)
       - [apache2](#apache2)
       - [fortune](#fortune)
   - [Final thoughts](#final-thoughts)
@@ -152,7 +152,7 @@ $  sudo salt '*' state.highstate
 
 And there we go!
 
-### d) Collect machine data using **grains.items** command
+### d) Collect machine data using grains.items command
 
 Let's collect some information. I'm currently running virtual Linux build hosted on [DigitalOcean](https://www.digitalocean.com/):
 
@@ -191,7 +191,7 @@ slave-1:
         - 3003
 ```
 
-### e) Testing state **pkg.installed**
+### e) Testing state pkg.installed
 
 #### apache2
 
@@ -281,7 +281,7 @@ Salt was very interesting topic and would appear extremely useful tool. Setting 
 
 ## Sources
 
-Tero Karvinen - [h1](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h1-hei-maailma-verkon-yli-ja-idempotenssi)
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 h1](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h1-hei-maailma-verkon-yli-ja-idempotenssi)
 
 Tero Karvinen - [Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux](http://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/)
 
@@ -296,3 +296,6 @@ LinuxForDevices - [How to fix “Unable To Locate Package”? – (Fix with APT 
 Kristopher Sandoval - [Understanding Idempotency and Safety in API Design ](https://nordicapis.com/understanding-idempotency-and-safety-in-api-design/)
 
 ## Edit history
+
+19.05.2021
+* Typo fixes

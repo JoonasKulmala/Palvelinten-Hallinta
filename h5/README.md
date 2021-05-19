@@ -8,7 +8,6 @@
       - [Testing in action](#testing-in-action)
     - [b) Sammakko ja skorppioni](#b-sammakko-ja-skorppioni)
       - [Creating salt state, running into issues](#creating-salt-state-running-into-issues)
-      - [Fixing issues](#fixing-issues)
     - [c) CSI Pasila](#c-csi-pasila)
     - [c) Tiedän mitä teit viime kesän^H^H^H komennolla](#c-tiedän-mitä-teit-viime-kesänhhh-komennolla)
     - [d) Program /w settings](#d-program-w-settings)
@@ -115,7 +114,7 @@ Let's install a popular editor called [Visual Studio Code](https://code.visualst
 
 If we run **apt-get install** without having the apt repository saved:
 
-    # Package: code
+    # Visual Studio Code package: code
     $ sudo apt-get install code
     ...
     No apt package "code", but there is a snap with that name.
@@ -131,75 +130,28 @@ Let's go with option 2 and manually add the apt repository first, then install t
 2.  Update package list
 3.  Install package
 
-I created a state file `/srv/salt/vscode/vscode.sls`:
+First we need the repository key. Let's download the armored repository and extract the key with the following command:
 
-    'wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg':
-      cmd.run
+    $ sudo wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 
-    'sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/':
-      cmd.run
+Now let's simply create a regular salt state `/srv/salt/vscode/vscode.sls`:
 
-    'sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'':
-      cmd.run
-     #   -creates: /etc/apt/sources.list.d/vscode.list
+    /etc/apt/trusted.gpg.d/packages.microsoft.gpg:
+      file.managed:
+            - source: salt://vscode/packages.microsoft.gpg
 
-    'rm -f packages.microsoft.gpg':
-      cmd.run
+    /etc/apt/sources.list.d/vscode.list:
+     file.managed:
+            - source: salt://vscode/vscode.list
 
-    'sudo apt-get install apt-transport-https':
-      cmd.run
-
-    'sudo apt-get update':
-      cmd.run
-
-    # Visual Studio Code
     code:
-      pkg.installed: []
+     pkg.installed
 
-However, trying to run it in debug mode I ran into syntax issue:
+Now simply applying the state should do the trick:
 
-![salt syntax issue](Resources/salt_syntax-issue.png)
+    $ sudo salt '*' state.apply vscode/vscode
 
-Testing each command individually I managed to narrow it down to this line:
-
-    'sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable    main" > /etc/apt/sources.list.d/vscode.list'':
-     cmd.run
-
-Specifically, the single quotes starting from **'echo...'** that would appear to clash with YAML syntax. Removing them allows salt to progress but it just fails at a later step due to not being able to find the apt repository:
-
-![failure](Resources/failure.png)
-
-#### Fixing issues
-
-What's the best way to fix issues? Apparently changing stuff until it resolves itself somehow. And so...
-
-As stated above the issue was with the command:
-
-    'sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable    main" > /etc/apt/sources.list.d/vscode.list'':
-     cmd.run
-
-I removed the first part **sudo sh -c** for running the created shell script and... it worked. Now when I run the salt state in debug mode again:
-
-    $ sudo salt-call --local state.apply vscode/vscode -l debug
-    ...
-    Summary for local
-    ------------
-    Succeeded: 7 (changed=7)
-    Failed:    0
-    ...
-
-![state ok](Resources/state_ok.png)
-
-It would seem that Visual Studio Code was installed succesfully.
-
-    $ code --version
-    1.55.2
-    3c4e3df9e89829dce27b7b5c24508306b151f30d
-    x64
-
-<img src="Resources/vscode.png" width="400">
-
-All's well that ends well... I suppose? Not quite, but atleast we managed to make it work. I'll research more into the matter and consult others to evaluate the situation properly. I've included the [`vscode.sls`](vscode.sls) file here. Until then...
+![vscode state](Resources/vscode_state.png)
 
 ### c) CSI Pasila
 
@@ -337,7 +289,7 @@ Practice makes perfect, right? Perhaps not, but I feel like getting better and b
 
 ## Sources
 
-Tero Karvinen - [h5](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h5-aikajana)
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 h5](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h5-aikajana)
 
 Visual Studio Code - [Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
 
@@ -350,3 +302,6 @@ Spotify - [Spotify for Linux](https://www.spotify.com/us/download/linux/)
 05.05.2021
 * Add task d) Program /w settings
 * Add Spotify source
+
+19.05.2021
+* Refactor task b)

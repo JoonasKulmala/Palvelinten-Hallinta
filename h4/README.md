@@ -353,7 +353,7 @@ Browsing other peoples' salt projects was interesting. It's nice to be able to r
 
 ## Sources
 
-Tero Karvinen - [h4 Uusi komento](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h4-uusi-komento)
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 h4](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h4-uusi-komento)
 
 SaltStack - [How Do I Use Salt States?](https://docs.saltproject.io/en/latest/topics/tutorials/starting_states.html)
 

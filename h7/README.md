@@ -1,9 +1,9 @@
 ![license](https://img.shields.io/badge/license-gpl--3.0-brightgreen)
-![repo size](https://img.shields.io/github/repo-size/JoonasKulmala/Salt-My-Ubuntu)
 
-# Salt My Ubuntu
+# Joonas Kulmala | h7 | Salt My Ubuntu
 
-- [Salt My Ubuntu](#salt-my-ubuntu)
+- [!repo size](#)
+- [Joonas Kulmala | h7 | Salt My Ubuntu](#joonas-kulmala--h7--salt-my-ubuntu)
   - [Getting started](#getting-started)
     - [Salt Master](#salt-master)
     - [Salt Minion](#salt-minion)
@@ -29,6 +29,8 @@
 Please see `USER GUIDE` and edit the necessary files before installing.
 
 Learn more about the [Salt Project](https://docs.saltproject.io/en/latest/topics/about_salt_project.html), how to manually perform [Installation](https://docs.saltproject.io/en/latest/topics/installation/index.html) installation on your system and guide to  [Configuring Salt](https://docs.saltproject.io/en/latest/topics/configuration/index.html).
+
+**NOTE**: this guide is available as a standalone repository for downloading in here: Joonas Kulmala - [Salt My Ubuntu](https://github.com/JoonasKulmala/Salt-My-Ubuntu)
 
 ## Getting started
 
@@ -161,7 +163,7 @@ Now we have an easy 3 step method for generating new salt minions!
 
 ## License
 
-Salt My Ubuntu is a personal projected being distributed under [GPL-3.0](https://github.com/JoonasKulmala/Salt-My-Ubuntu/blob/main/LICENSE) license.
+Salt My Ubuntu is a personal project being distributed under [GPL-3.0](https://github.com/JoonasKulmala/Salt-My-Ubuntu/blob/main/LICENSE) license.
 
 ## Sources
 
@@ -170,5 +172,5 @@ SaltStack
 * [Installation](https://docs.saltproject.io/en/latest/topics/installation/index.html)
 * [Configuring Salt](https://docs.saltproject.io/en/latest/topics/configuration/index.html)
 
-Joonas Kulmala - [Palvelinten Hallinta #h7](https://github.com/JoonasKulmala/Palvelinten-Hallinta/tree/main/h7)
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 #h7](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h7-oma-moduli)
 

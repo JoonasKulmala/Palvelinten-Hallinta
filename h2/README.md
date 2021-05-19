@@ -332,6 +332,8 @@ Interesting topic on how to further leverage the power of salt. It seems to be a
 
 ## Sources
 
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 h2](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h2-package-file-service)
+
 Tero Karvinen - [Apache User Homepages Automatically – Salt Package-File-Service Example](http://terokarvinen.com/2018/apache-user-homepages-automatically-salt-package-file-service-example/index.html?fromSearch=)
 
 SaltStack - [The Top File](https://docs.saltproject.io/en/latest/ref/states/top.html)

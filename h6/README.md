@@ -115,7 +115,7 @@ I barely tested salt on Windows so it's difficult to say how well it's supposed 
 
 ## Sources
 
-Tero Karvinen - [h6](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h6-windows)
+Tero Karvinen - [Configuration Management Systems - Palvelinten Hallinta - Spring 2021 h6](https://terokarvinen.com/2021/configuration-management-systems-palvelinten-hallinta-ict4tn022-spring-2021/#h6-windows)
 
 SaltStack - [Windows](https://docs.saltproject.io/en/latest/topics/installation/windows.html)
 
