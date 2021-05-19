@@ -1,0 +1,37 @@
+Welcome to Salt My Ubuntu guide! This document will walk you through the installation process.
+
+
+--- BEFORE YOU INSTALL ---
+
+- Modify the file /Salt-My-Ubuntu/minion:
+	- master: IP of salt master (e.g. localhost, 127.0.0.1)
+	- id: name of your salt minion (e.g. minion-1, ubuntu-minion)
+- Make sure Salt Master can be connected to via ports 4505 & 4506 by adding rules to either
+	-iptables
+	-ufw
+
+
+--- HOW TO INSTALL ---
+
+- run the bash script via terminal using the command:
+
+	bash install-master
+	bash install-minion
+
+Alternatively, perform manual installation following this guide: https://github.com/JoonasKulmala/Salt-My-Ubuntu#manual-install
+
+
+--- TROUBLESHOOTING ---
+
+E: Package 'salt-minion' has no installation candidate
+- make sure your have the files /etc/apt/sources.list.d/salt.list AND /usr/share/keyrings/salt-archive-keyring.gpg
+- remember to update repository list with the command:
+	sudo apt-get update
+
+
+--- OFFICIAL SALTSTACK DOCUMENTATION ---
+
+Salt Project - https://docs.saltproject.io/en/latest/topics/about_salt_project.html
+Installation - https://docs.saltproject.io/en/latest/topics/installation/index.html
+Configuring the Salt Minion - https://docs.saltproject.io/en/latest/ref/configuration/minion.html
+Configuring the Salt Master - https://docs.saltproject.io/en/latest/ref/configuration/master.html

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Import the SaltStack repository key
+sudo cp salt-archive-keyring.gpg /usr/share/keyrings/salt-archive-keyring.gpg
+
+# Add the SaltStack repository list
+echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list
+
+# Update repository list
+sudo apt-get -y update
+
+# Install salt minion
+sudo apt-get -y install salt-minion
+
+# Copy the minion configuration file
+sudo cp minion /etc/salt/
+
+# Restart salt minion daemon to connect with salt master
+sudo systemctl restart salt-minion
+
+# Remove directory when installed, commented out for debugging purposes
+#cd
+#sudo rm -r ~/Salt-My-Ubuntu/
