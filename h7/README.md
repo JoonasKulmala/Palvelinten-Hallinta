@@ -1,8 +1,8 @@
 ![license](https://img.shields.io/badge/license-gpl--3.0-brightgreen)
+![language](https://img.shields.io/github/languages/top/JoonasKulmala/Salt-My-Ubuntu)
 
 # Joonas Kulmala | h7 | Salt My Ubuntu
 
-- [!repo size](#)
 - [Joonas Kulmala | h7 | Salt My Ubuntu](#joonas-kulmala--h7--salt-my-ubuntu)
   - [Getting started](#getting-started)
     - [Salt Master](#salt-master)
@@ -30,7 +30,7 @@ Please see `USER GUIDE` and edit the necessary files before installing.
 
 Learn more about the [Salt Project](https://docs.saltproject.io/en/latest/topics/about_salt_project.html), how to manually perform [Installation](https://docs.saltproject.io/en/latest/topics/installation/index.html) installation on your system and guide to  [Configuring Salt](https://docs.saltproject.io/en/latest/topics/configuration/index.html).
 
-**NOTE**: this guide is available as a standalone repository for downloading in here: Joonas Kulmala - [Salt My Ubuntu](https://github.com/JoonasKulmala/Salt-My-Ubuntu)
+**NOTE: this guide is available as a standalone repository for downloading in here:** Joonas Kulmala - [Salt My Ubuntu](https://github.com/JoonasKulmala/Salt-My-Ubuntu)
 
 ## Getting started
 
