@@ -28,6 +28,11 @@ E: Package 'salt-minion' has no installation candidate
 - remember to update repository list with the command:
 	sudo apt-get update
 
+Salt Minion key doesn't appear to Salt Master
+- Make sure Salt Master is visible publicly (shared network, public IP)
+	- your local Master is bu default invisible to public (research: port forwarding)
+- Ports 4505 & 4506 open from firewall settings (iptables, UFW)
+
 
 --- OFFICIAL SALTSTACK DOCUMENTATION ---
 
